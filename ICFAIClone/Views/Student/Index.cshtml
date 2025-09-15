@@ -1,0 +1,23 @@
+﻿@using ICFAIClone.Models.Entities
+@model List<ICFAIClone.Models.Entities.Student>
+IEnumerable<Student>
+
+<table>
+    <tr>
+        <th>FullName</th>
+        <th>Roll Number</th>
+        <th>Email</th>
+        <th>Course</th>
+        <th>DOB</th>
+    </tr>
+    @foreach (var student in Model)
+    {
+        <tr>
+            <td>@student.FullName</td>
+            <td>@student.EnrollmentNumber</td>
+            <td>@student.Email</td>
+            <td>@student.Course</td>
+            <td>@student.DateOfBirth</td>
+        </tr>
+    }
+</table>

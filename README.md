@@ -25,4 +25,4 @@ ICFAIClone is a web application that replicates core functionalities of the ICFA
 - SQL Server (Express or full version)
 - Git (for cloning the repo)
 
-https://github.com/yourusername/ICFAIClone.git
+https://github.com/Tvmsasank/ICFAIClone.git

@@ -10,158 +10,124 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-secondary border-bottom box-shadow mb-3   border-bottom border-danger ">
+        <nav class="navbar navbar-expand-sm navbar-light bg-secondary border-bottom border-danger shadow-sm mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand"
+                <a class="navbar-brand text-black"
                    href="https://localhost:7220/"
-                   style="color: black;"
-                   onmouseover="this.style.color='red'"
-                   onmouseout="this.style.color='black'">
-                   ICFAI Group</a>
+                   onmouseover="this.classList.replace('text-black','text-danger')"
+                   onmouseout="this.classList.replace('text-danger','text-black')">
+                    ICFAI Group
+                </a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1 ">
+                    <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link"
+                            <a class="nav-link text-black"
                                href="https://www.icfaiuniversity.in"
-                               style="color: black;"
-                               onmouseover="this.style.color='red'"
-                               onmouseout="this.style.color='black'">
+                               onmouseover="this.classList.replace('text-black','text-danger')"
+                               onmouseout="this.classList.replace('text-danger','text-black')">
                                 Home
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link"
+                            <a class="nav-link text-black"
                                href="https://online.ifheindia.org/privacy-policy.html"
                                target="_blank"
-                               style="color: black;"
-                               onmouseover="this.style.color='red'"
-                               onmouseout="this.style.color='black'">
+                               onmouseover="this.classList.replace('text-black','text-danger')"
+                               onmouseout="this.classList.replace('text-danger','text-black')">
                                 Privacy
                             </a>
+                        </li>
 
                         <li class="nav-item">
-                            <a class="nav-link"
+                            <a class="nav-link text-black"
                                href="https://general.ibsindia.org/mba-pgpm/?utm_Source=CDUN&utm_medium=kamp23&utm_campaign=online&msclkid=63ccb062200a15ebc66cd8d8a9a720d6"
                                target="_blank"
-                               style="color: black;"
-                               onmouseover="this.style.color='red'"
-                               onmouseout="this.style.color='black'">
+                               onmouseover="this.classList.replace('text-black','text-danger')"
+                               onmouseout="this.classList.replace('text-danger','text-black')">
                                 Register Now
                             </a>
                         </li>
 
-                        <div class="dropdown">
-                            <button class="btn custom-toggle-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="true">
+                        <li class="nav-item dropdown">
+                            <button class="btn bg-light text-black rounded-pill px-3 py-1 dropdown-toggle"
+                                    type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 More
                             </button>
-                            <ul class="dropdown-menu" custom-dropdown-menu">
-                                <li class="nav-item">
-                                    <a class="nav-link"
+                            <ul class="dropdown-menu p-1 small">
+                                <li>
+                                    <a class="dropdown-item text-black"
                                        href="https://admissions.ibsindia.org/mocktest/Login.aspx?utm_source=CDUN&utm_medium=kamp23&utm_campaign=online"
                                        target="_blank"
-                                       style="color: black;"
-                                       onmouseover="this.style.color='red'"
-                                       onmouseout="this.style.color='black'">
+                                       onmouseover="this.classList.replace('text-black','text-danger')"
+                                       onmouseout="this.classList.replace('text-danger','text-black')">
                                         Mock Test
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Admin" asp-action="Login"
-                                       style="color: black;" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">
+                                <li>
+                                    <a class="dropdown-item text-black"
+                                       asp-controller="Admin" asp-action="Login"
+                                       onmouseover="this.classList.replace('text-black','text-danger')"
+                                       onmouseout="this.classList.replace('text-danger','text-black')">
                                         Admin Login
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Student" asp-action="Login"
-                                       style="color: black;" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">
+                                <li>
+                                    <a class="dropdown-item text-black"
+                                       asp-controller="Student" asp-action="Login"
+                                       onmouseover="this.classList.replace('text-black','text-danger')"
+                                       onmouseout="this.classList.replace('text-danger','text-black')">
                                         Student Login
                                     </a>
                                 </li>
                             </ul>
-                            <style>
-                            /* Change toggle button color */
-                            .custom-toggle-btn {
-                            background-color: lightgray; /* Example: purple */
-                            color: black;
-                            border-radius: 100px;
-                            min-width: 10px;
-                            padding: 0.5rem 0.5rem;
-                            font-size: 1.0rem;
-                            }
-
-                            .custom-toggle-btn:hover {
-                            background-color: lightblue; /* Darker on hover */
-                            }
-
-                            /* Reduce dropdown menu size */
-                            .custom-dropdown-menu {
-                            min-width: 1px; /* smaller than default 10rem */
-                            padding: 0.25rem; /* less padding */
-                            font-size: 0.25rem; /* slightly smaller font */
-                            }
-                            </style>
-
-                        </div>
-
+                        </li>
                     </ul>
-                    <div style="display: flex; flex-direction: column;" class="nav-item">
-                        <a class="nav-link"
+
+                    <div class="nav-item d-flex flex-column">
+                        <a class="nav-link text-black"
                            href="https://iutripura.in/about-us"
                            target="_blank"
-                           style="color: black;"
-                           onmouseover="this.style.color='red'"
-                           onmouseout="this.style.color='black'">
+                           onmouseover="this.classList.replace('text-black','text-danger')"
+                           onmouseout="this.classList.replace('text-danger','text-black')">
                             About Us
                         </a>
                     </div>
 
-                    <div>
-                        <marquee behavior="scroll" direction="right" onmouseover="this.stop();" onmouseout="this.start()" style="color: red; font-weight: normal; font-size:20px;">
+                    <div class="d-flex align-items-center ms-3">
+                        <marquee behavior="scroll" direction="right"
+                                 onmouseover="this.stop();" onmouseout="this.start();"
+                                 class="text-danger fw-normal fs-5">
                             !!! ICFAI Group !!!
                         </marquee>
-                        <picture>
-                            <img src="~/img/logo_icfai.jpg"
-                                 alt="ICFAI Logo"
-                                 style="width:90px; height:auto;" />
-                        </picture>
+                        <img src="~/img/profiles/logo_icfai.jpg" alt="ICFAI Logo" class="ms-2" style="width: 90px; height: auto;" />
                     </div>
                 </div>
-
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer>
-        <style>
-            .footer {
-                background-color: transparent; /* dark background for contrast */
-                color: antiquewhite; /* text color */
-                text-align: right; /* center the text */
-                font-size: 14px; /* smaller, footer-friendly text */
-                font-family: Arial, sans-serif; /* clean font */
-                border-top: 0 solid #4040; /* subtle top border */
-            }
-
-        </style>
-        <div style="color: whitesmoke">
+    <footer class="text-last text-white small font-monospace pt-2">
+        <div class="text-white">
             &copy; 2025 - ICFAI Group. All rights reserved
         </div>
 
         <div class="enquiry-box fade-in">
             <!-- content -->
         </div>
+
         <script>
             window.addEventListener('scroll', () => {
                 document.querySelectorAll('.fade-in').forEach(el => {
@@ -173,6 +139,7 @@
             });
         </script>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

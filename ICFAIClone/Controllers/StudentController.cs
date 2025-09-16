@@ -126,29 +126,6 @@ public class StudentController : Controller
         return View(new List<Student> { student });
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Create(Student student, IFormFile ProfileImage)
-    {
-        if (ProfileImage != null && ProfileImage.Length > 0)
-        {
-            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ProfileImage.FileName);
-            var filePath = Path.Combine("wwwroot/img/profiles", fileName);
-
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await ProfileImage.CopyToAsync(stream);
-            }
-
-            student.ProfileImage = fileName;
-        }
-
-        // Save student to DB
-        _context.Students.Add(student);
-        await _context.SaveChangesAsync();
-
-        return RedirectToAction("Dashboard");
-    }
-
 
     // ✅ Logout
     public IActionResult Logout()

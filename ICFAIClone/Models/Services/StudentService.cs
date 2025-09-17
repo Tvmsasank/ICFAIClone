@@ -23,11 +23,16 @@ namespace ICFAIClone.Services
             using (var cmd = new SqlCommand("InsertStudent", conn))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Course", student.Course);
-                cmd.Parameters.AddWithValue("@DateOfBirth", student.DateOfBirth);
-                cmd.Parameters.AddWithValue("@Email", student.Email);
-                cmd.Parameters.AddWithValue("@EnrollmentNumber", student.EnrollmentNumber);
+
+                // ✅ Handle ProfileImage safely
+                cmd.Parameters.AddWithValue("@ProfileImage", student.ProfileImage ?? (object)DBNull.Value);
+
+                // Add all required parameters
                 cmd.Parameters.AddWithValue("@FullName", student.FullName);
+                cmd.Parameters.AddWithValue("@EnrollmentNumber", student.EnrollmentNumber);
+                cmd.Parameters.AddWithValue("@Email", student.Email);
+                cmd.Parameters.AddWithValue("@DateOfBirth", student.DateOfBirth);
+                cmd.Parameters.AddWithValue("@Course", student.Course);
                 cmd.Parameters.AddWithValue("@Fees", student.Fees);
                 cmd.Parameters.AddWithValue("@IsActive", student.IsActive);
 
@@ -35,6 +40,7 @@ namespace ICFAIClone.Services
                 cmd.ExecuteNonQuery();
             }
         }
+
 
         public bool ValidateStudentLogin(string username, string password)
         {

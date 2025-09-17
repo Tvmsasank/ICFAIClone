@@ -1,5 +1,6 @@
-using Microsoft.EntityFrameworkCore;
 using ICFAIClone.db;
+using ICFAIClone.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
 builder.Services.AddSingleton<SqlConnectionHelper>();
+builder.Services.AddScoped<AdminService>();
+builder.Services.AddScoped<SqlConnectionHelper>();
+builder.Services.AddScoped<StudentService>();
+
+
 
 var app = builder.Build();
 
@@ -27,5 +33,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
 app.Run();

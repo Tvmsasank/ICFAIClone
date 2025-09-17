@@ -1,20 +1,19 @@
-﻿using ICFAIClone.db;
-using ICFAIClone.Models;
+﻿using ICFAIClone.Models;
+using ICFAIClone.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 
 namespace ICFAIClone.Controllers
 {
     public class AdminController : Controller
     {
-        private readonly SqlConnectionHelper _dbHelper;
+        private readonly AdminService _adminService;
 
         private const string adminUser = "admin";
         private const string adminPass = "Admin@123";
 
-        public AdminController(SqlConnectionHelper dbHelper)
+        public AdminController(AdminService adminService)
         {
-            _dbHelper = dbHelper;
+            _adminService = adminService;
         }
 
         [HttpGet]
@@ -37,35 +36,8 @@ namespace ICFAIClone.Controllers
 
         public IActionResult AdminDashboard()
         {
-            List<Enquiry> enquiries = GetAllEnquiries();
+            var enquiries = _adminService.GetAllEnquiries();
             return View(enquiries);
-        }
-
-        private List<Enquiry> GetAllEnquiries()
-        {
-            var list = new List<Enquiry>();
-
-            using (var conn = _dbHelper.GetConnection())
-            {
-                conn.Open();
-                var cmd = new SqlCommand("SELECT Name, Email, Phone, Address FROM Enquiries", conn);
-
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        list.Add(new Enquiry
-                        {
-                            Name = reader.GetString(0),
-                            Email = reader.GetString(1),
-                            Phone = reader.GetString(2),
-                            Address = reader.GetString(3)
-                        });
-                    }
-                }
-            }
-
-            return list;
         }
 
         public IActionResult Logout()

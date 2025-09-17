@@ -1,44 +1,49 @@
 ﻿@model List<ICFAIClone.Models.Enquiry>
 
-<h2>Welcome, Admin!</h2>
-<p>Here you can checkout the Enquiries made by the Students and solve their queries !</p>
+<div class="container my-5">
+    <h2 class="mb-3 text-primary">Welcome, Admin!</h2>
+    <p class="mb-4">Here you can check out the enquiries made by students and solve their queries!</p>
 
-<form asp-action="Logout" asp-controller="Admin" method="post" class="mb-4" style="display:revert-layer;">
-    <button type="submit" class="btn btn-danger">Logout</button>
-</form>
+    <div class="d-flex gap-3 mb-4">
+        <form asp-action="Logout" asp-controller="Admin" method="post">
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
 
-<form asp-action="Create" asp-controller="Student" method="post" class="mb-4" style="display:revert-layer;">
-    <button type="submit" class="btn btn-danger">Create DataBase for Student</button>
-</form>
+        <form asp-action="Create" asp-controller="Student" method="post">
+            <button type="submit" class="btn btn-warning">Create Database for Student</button>
+        </form>
+    </div>
 
-@if (Model != null && Model.Count > 0)
-{
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Address</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var enquiry in Model)
-            {
-                <tr>
-                    <td>@enquiry.Name</td>
-                    <td>@enquiry.Email</td>
-                    <td>@enquiry.Phone</td>
-                    <td>@enquiry.Address</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-
-else
-{
-    <p>No enquiries found.</p>
-
-}
-
+    @if (Model != null && Model.Count > 0)
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var enquiry in Model)
+                    {
+                        <tr>
+                            <td>@enquiry.Name</td>
+                            <td>@enquiry.Email</td>
+                            <td>@enquiry.Phone</td>
+                            <td>@enquiry.Address</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info mt-4" role="alert">
+            No enquiries found.
+        </div>
+    }
+</div>

@@ -4,46 +4,30 @@
     ViewData["Title"] = "Admin Login";
 }
 
-<style>
-    body {
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-color: #f8f9fa;
-        height: 100vh;
-        justify-content: center;
-        align-items: center;
-        filter: brightness(100%);
-    }
-    .login-container {
-        background-color: rgba(255, 255, 255, 0.9);
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 0 16px rgba(0,0,0,0.2);
-        width: 100%;
-        max-width: 400px;
-    }
-</style>
+<!-- Bootstrap container for centering -->
+<div class="container d-flex justify-content-center align-items-center min-vh-100 bg-white">
+    <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%;">
+        <h2 class="text-center mb-4 text-primary">Admin Login</h2>
 
-<div class="login-container">
-    <h2 class="text-center mb-4">Admin Login</h2>
+        <form asp-action="Login" asp-controller="Admin" method="post">
+            <div class="mb-3">
+                <label asp-for="Username" class="form-label"></label>
+                <input asp-for="Username" class="form-control" />
+            </div>
 
-    <form asp-action="Login" asp-controller="Admin" method="post">
-        <div class="form-group mb-3">
-            <label asp-for="Username"></label>
-            <input asp-for="Username" class="form-control" />
-        </div>
+            <div class="mb-4">
+                <label asp-for="Password" class="form-label"></label>
+                <input asp-for="Password" type="password" class="form-control" />
+            </div>
 
-        <div class="form-group mb-4">
-            <label asp-for="Password"></label>
-            <input asp-for="Password" type="password" class="form-control" />
-        </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
 
-        <button type="submit" class="btn btn-primary w-100">Login</button>
-
-        @if (ViewBag.Error != null)
-        {
-            <div class="text-danger mt-3 text-center">@ViewBag.Error</div>
-        }
-    </form>
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger mt-3 text-center" role="alert">
+                    @ViewBag.Error
+                </div>
+            }
+        </form>
+    </div>
 </div>

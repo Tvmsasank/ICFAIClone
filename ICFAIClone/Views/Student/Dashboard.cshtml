@@ -1,51 +1,50 @@
 ﻿@using Azure
 @using ICFAIClone.Models.Entities
+@model List<Student>
+
 @{
     ViewBag.Title = "Student Dashboard";
 }
 
-<h2>Welcome, @ViewBag.Username!</h2>
-<p><b>!!! You can go through your profile !!!</b></p>
-<div class="d-flex justify-content-end mb-4">
-    <form asp-action="Logout" asp-controller="Student" method="post">
-        <button type="submit" class="btn btn-danger">Logout</button>
-    </form>
-</div>
+<div class="container py-5">
+    <h2 class="mb-3 text-primary">Welcome, @ViewBag.Username!</h2>
+    <p class="mb-4 fw-bold text-secondary">You can go through your profile below.</p>
 
-@model List<Student>
+    <div class="d-flex justify-content-end mb-4">
+        <form asp-action="Logout" asp-controller="Student" method="post">
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+    </div>
 
-
-@foreach (var student in Model)
-{
-    <div style="background-color: white; color: darkred; padding: 1px;">
-     <div class="row">
-            <div class="col-md-4">
-                <!-- Profile Card -->
-                <div class="card-body">
-                    <div class="card-body text-center">
-                        <img src="~/img/profiles/@(string.IsNullOrEmpty(student.ProfileImage) ?"logo_icfai_1.jpg": student.ProfileImage)"
-                             class="rounded-circle" width="120" height="120" />
-                        <h4>@student.FullName</h4>
-                        <p class="text-muted">@student.Email</p>
-                        <span class="badge bg-success">@student.Course</span>
-                    </div>
+    @foreach (var student in Model)
+    {
+        <div class="card mb-5 shadow-sm">
+            <div class="row g-0">
+                <!-- Profile Section -->
+                <div class="col-md-4 bg-light d-flex flex-column align-items-center justify-content-center p-4">
+                    <img src="~/img/profiles/@(string.IsNullOrEmpty(student.ProfileImage) ? "logo_icfai_1.jpg" : student.ProfileImage)"
+                         class="rounded-circle mb-3" width="120" height="120" alt="Profile Image" />
+                    <h4 class="mb-1">@student.FullName</h4>
+                    <p class="text-muted mb-2">@student.Email</p>
+                    <span class="badge bg-success">@student.Course</span>
                 </div>
-            </div>
 
-            <div class="col-md-8">
                 <!-- Details Section -->
-                <div class="card">
-                    <div class="card-header">
-                        <h5>Student Details</h5>
-                    </div>
+                <div class="col-md-8">
                     <div class="card-body">
+                        <h5 class="card-title mb-3">Student Details</h5>
                         <p><strong>Enrollment Number:</strong> @student.EnrollmentNumber</p>
                         <p><strong>Date of Birth:</strong> @student.DateOfBirth</p>
                         <p><strong>Fees:</strong> ₹@student.Fees</p>
-                        <p><strong>Status:</strong> @(student.IsActive ? "Active" : "Inactive")</p>
+                        <p>
+                            <strong>Status:</strong>
+                            <span class="badge @(student.IsActive ? "bg-success" : "bg-secondary")">
+                                @(student.IsActive ? "Active" : "Inactive")
+                            </span>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 }
+</div>

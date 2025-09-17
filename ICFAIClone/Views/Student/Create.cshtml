@@ -1,43 +1,61 @@
 ﻿
-<form asp-action="Create" method="post" enctype="multipart/form-data">
-    <!-- Other fields -->
+<div class="container my-5">
+    <h2 class="mb-4 text-primary">Create Student Profile</h2>
 
-    <label for="ProfileImage">Upload Profile Photo</label>
-    <input type="file" name="ProfileImage" class="form-control" />
+    <!-- Profile Image Upload Form -->
+    <form asp-action="Create" method="post" enctype="multipart/form-data" class="mb-5">
+        <div class="mb-3">
+            <label for="ProfileImage" class="form-label">Upload Profile Photo</label>
+            <input type="file" name="ProfileImage" id="ProfileImage" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+    <!-- Student Details Form -->
+    <form asp-action="Create" asp-controller="Student" method="post" class="mb-5">
+        <div class="mb-3">
+            <label for="FullName" class="form-label">Full Name</label>
+            <input type="text" name="FullName" id="FullName" class="form-control" />
+        </div>
 
-<form asp-action="Create" asp-controller="Student" method="post" class="mb-4" style="display:revert-layer;"></form>
-<form action="Create" method="post">
-    <label for="FullName">Full Name</label>
-    <input type="text" name="FullName" id="FullName" class="form-control" />
+        <div class="mb-3">
+            <label for="EnrollmentNumber" class="form-label">Enrollment Number</label>
+            <input type="text" name="EnrollmentNumber" id="EnrollmentNumber" class="form-control" />
+        </div>
 
-    <label for="EnrollmentNumber">Enrollment Number</label>
-    <input type="text" name="EnrollmentNumber" id="EnrollmentNumber" class="form-control" />
+        <div class="mb-3">
+            <label for="Email" class="form-label">Email</label>
+            <input type="email" name="Email" id="Email" class="form-control" />
+        </div>
 
-    <label for="Email">Email</label>
-    <input type="email" name="Email" id="Email" class="form-control" />
+        <div class="mb-3">
+            <label for="DateOfBirth" class="form-label">Date of Birth</label>
+            <input type="date" name="DateOfBirth" id="DateOfBirth" class="form-control" />
+        </div>
 
-    <label for="DateOfBirth">DOB</label>
-    <input type="date" name="DateOfBirth" id="DOB" class="form-control" />
+        <div class="mb-3">
+            <label for="Course" class="form-label">Course</label>
+            <input type="text" name="Course" id="Course" class="form-control" />
+        </div>
 
-    <label for="Course">Course</label>
-    <input type="text" name="Course" id="Course" class="form-control" />
+        <div class="mb-3">
+            <label for="Fees" class="form-label">Fees</label>
+            <input type="number" name="Fees" id="Fees" class="form-control" />
+        </div>
 
-    <label for="Fees">Fees</label>
-    <input type="number" name="Fees" id="Fees" class="form-control" />
+        <div class="form-check mb-4">
+            <input type="hidden" name="IsActive" value="false" />
+            <input type="checkbox" name="IsActive" value="true" id="IsActive" class="form-check-input" />
+            <label for="IsActive" class="form-check-label">Is Active</label>
+        </div>
 
-    <input type="hidden" name="IsActive" value="false" />
-    <input type="checkbox" name="IsActive" value="true" />
-    <label for="IsActive">Is Active</label>
+        <button type="submit" class="btn btn-success w-100">Submit</button>
+    </form>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-
-</form>
-@if (ViewBag.Message != null)
-{
-    <div class="alert alert-success">
-        @ViewBag.Message
-    </div>
-}
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success text-center">
+            @ViewBag.Message
+        </div>
+    }
+</div>

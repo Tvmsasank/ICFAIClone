@@ -9,6 +9,7 @@ namespace ICFAIClone.Models
     
 public class Enquiry
     {
+        public int EnquiryId { get; set; }
         public required string Name { get; set; }
         public required string Email { get; set; }
         public string? Phone { get; set; }

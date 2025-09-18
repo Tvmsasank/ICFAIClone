@@ -1,6 +1,14 @@
-﻿using ICFAIClone.Models;
+﻿using FakeItEasy;
+using FluentAssertions;
+using ICFAIClone.Models;
+using ICFAIClone.Models.Entities;
 using ICFAIClone.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
+using System.Threading;
+using static System.Collections.Specialized.BitVector32;
 
 namespace ICFAIClone.Controllers
 {
@@ -36,9 +44,69 @@ namespace ICFAIClone.Controllers
 
         public IActionResult AdminDashboard()
         {
-            var enquiries = _adminService.GetAllEnquiries();
-            return View(enquiries);
+            var model = new AdminDashboardViewModel
+            {
+                Enquiries = _adminService.GetAllEnquiries(),
+                Students = _adminService.GetAllStudents()
+            };
+            return View(model);
         }
+
+
+        [HttpGet]
+        public IActionResult EditEnquiry(int id)
+        {
+            var enquiry = _adminService.GetEnquiryById(id);
+            if (enquiry == null)
+            {
+                return NotFound();
+            }
+            return View(enquiry);
+        }
+
+        [HttpPost]
+        public IActionResult EditEnquiry(Enquiry enquiry)
+        {
+            if (ModelState.IsValid)
+            {
+                _adminService.UpdateEnquiry(enquiry);
+                return RedirectToAction("AdminDashboard");
+            }
+            return View(enquiry);
+        }
+
+        [HttpGet]
+        public IActionResult EditStudent(int id)
+        {
+            var student = _adminService.GetStudentById(id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+            return View(student);
+        }
+
+        [HttpPost]
+        [Route("Admin/EditStudent")]
+        public IActionResult UpdateStudent(Student student)
+        {
+            _adminService.UpdateStudent(student);
+            TempData["UpdateSuccess"] = "Student updated successfully!";
+            return RedirectToAction("AdminDashboard");
+        }
+
+        [HttpPost]
+        public IActionResult UpdateAllStudents(AdminDashboardViewModel model)
+        {
+            foreach (var student in model.Students)
+            {
+                _adminService.UpdateStudent(student);
+            }
+
+            TempData["UpdateSuccess"] = "All students updated successfully!";
+            return RedirectToAction("AdminDashboard");
+        }
+
 
         public IActionResult Logout()
         {
@@ -46,3 +114,5 @@ namespace ICFAIClone.Controllers
         }
     }
 }
+
+

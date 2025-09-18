@@ -1,0 +1,59 @@
+﻿@model ICFAIClone.Models.Entities.Student
+
+<div class="container my-auto">
+    <h2 class="mb-4 text-primary">Update Student</h2>
+
+    <!-- Optional Edit button (redundant if already on edit page) -->
+
+    <a asp-action="DeleteStudent" asp-controller="Admin" asp-route-id="@Model.StudentId" class="btn btn-sm btn-danger">Delete</a>
+
+    <a asp-action="UpdateStudent" asp-controller="Admin"  asp-route-id="@Model.StudentId" class="btn btn-sm btn-primary mb-4">Edit</a>
+
+    <form asp-action="UpdateStudent" asp-controller="Admin" method="post">
+
+        <input type="hidden" asp-for="StudentId" />
+
+        <div class="mb-3">
+            <label asp-for="Username"></label>
+            <input asp-for="Username" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="IsActive"></label>
+            <input asp-for="IsActive" class="form-control" type="hidden"/>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Course"></label>
+            <input asp-for="Course" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="DateOfBirth"></label>
+            <input asp-for="DateOfBirth" class="form-control" type="date" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="StudentId"></label>
+            <input asp-for="StudentId" class="form-control" type="number" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="EnrollmentNumber"></label>
+            <input asp-for="EnrollmentNumber" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="FullName"></label>
+            <input asp-for="FullName" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Fees"></label>
+            <input asp-for="Fees" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-success">Update</button>
+    </form>
+</div>

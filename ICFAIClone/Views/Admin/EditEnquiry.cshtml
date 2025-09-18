@@ -1,0 +1,37 @@
+﻿@model ICFAIClone.Models.Enquiry
+
+<div class="container my-5">
+    <h2 class="mb-4 text-primary">Edit Enquiry</h2>
+
+    <!-- Optional Edit button (redundant if already on edit page) -->
+
+    <a asp-action="DeleteStudent" asp-controller="Admin" asp-route-id="@Model.EnquiryId" class="btn btn-sm btn-danger">Delete</a>
+
+    <a asp-action="EditEnquiry" asp-controller="Admin" asp-route-id="@Model.EnquiryId" class="btn btn-sm btn-primary mb-4">Edit</a>
+
+    <form asp-action="EditEnquiry" method="post">
+        <input type="hidden" asp-for="EnquiryId" />
+
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Phone" class="form-label"></label>
+            <input asp-for="Phone" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Address" class="form-label"></label>
+            <input asp-for="Address" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-success">Update</button>
+    </form>
+</div>

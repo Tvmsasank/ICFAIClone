@@ -107,6 +107,23 @@ namespace ICFAIClone.Controllers
             return RedirectToAction("AdminDashboard");
         }
 
+        [HttpGet]
+
+        public IActionResult DeleteEnquiry(int id)
+        {
+            try
+            {
+                //call respository/service to delete
+                _adminService.DeleteStudent(id);
+
+                TempData["UpdateSuccess"] = "Student deleted successfully.";
+            }
+            catch (Exception ex)
+            {
+                TempData["UpdateSuccess"] = "Error deleting student:" + ex.Message;
+            }
+            return RedirectToAction("AdminDashboard"); //wherever your main view is
+        }
 
         public IActionResult Logout()
         {

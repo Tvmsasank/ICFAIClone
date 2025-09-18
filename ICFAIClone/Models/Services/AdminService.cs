@@ -192,6 +192,17 @@ namespace ICFAIClone.Services
                 }
             }
         }
+        public void DeleteStudent(int studentId)
+        {
+            using (SqlConnection conn = _dbHelper.GetConnection())
+                using (SqlCommand cmd = new SqlCommand("sp_DeleteStudent", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@StudentId", studentId);
 
+                    conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

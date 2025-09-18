@@ -21,11 +21,11 @@
 @if (Model.Students != null && Model.Students.Count > 0)
 {
         <form asp-action="UpdateAllStudents" asp-controller="Admin" method="post">
-            <div class="table-responsive mb-5">
-                <h4 class="text-danger">STUDENT TABLE</h4>
-                <table class="table table-bordered table-striped align-middle">
-                    <thead class="table-dark">
-                        <tr>
+                <h4 class="text-danger mb-3">STUDENT TABLE</h4>
+                <div class="table table-responsive mb-4 shadow-sm rounded">
+                    <table class="table table-bordered table-striped align-middle mb-0">
+                        <thead class="table-dark">
+                        <tr class="text-nowrap">
                             <th>Username</th>
                             <th>Password</th>
                             <th>IsActive</th>
@@ -50,7 +50,7 @@
                                 <td>
                                     <input type="text" name="Students[@i].Password" value="@Model.Students[i].Password" class="form-control" />
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <input type="checkbox" name="Students[@i].IsActive" value="true" @(Model.Students[i].IsActive ? "checked" : "") />
                                 </td>
                                 <td>
@@ -59,7 +59,7 @@
                                 <td>
                                     <input type="date" name="Students[@i].DateOfBirth" value="@Model.Students[i].DateOfBirth?.ToString("yyyy-MM-dd")" class="form-control" />
                                 </td>
-                                <td>@Model.Students[i].StudentId</td>
+                                <td class="text-nowrap">@Model.Students[i].StudentId</td>
                                 <td>
                                     <input type="email" name="Students[@i].Email" value="@Model.Students[i].Email" class="form-control" />
                                 </td>
@@ -73,16 +73,21 @@
                                     <input type="number" name="Students[@i].Fees" value="@Model.Students[i].Fees" class="form-control" />
                                 </td>
                                 <td class="text-center">
-                                    <a asp-action="DeleteEnquiry" asp-controller="Admin" asp-route-id="@Model.Students[i].StudentId" class="btn btn-sm btn-danger">Delete</a>
+                                    <a asp-action="DeleteEnquiry"
+                                    asp-controller="Admin"
+                                    asp-route-id="@Model.Students[i].StudentId"
+                                    class="btn btn-sm btn-danger w-100 w sm-auto"
+                                    onclick="return confirm('Are you sure you want to delete this student ?');">
+                                    Delete
+                                    </a>
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
                 <div class="text-end mt-3">
-                    <button type="submit" class="btn btn-success">Update All Students</button>
+                    <button type="submit" class="btn btn-success px-4">Update All Students</button>
                 </div>
-            </div>
         </form>
 }
 else

@@ -73,14 +73,13 @@
                                     <input type="number" name="Students[@i].Fees" value="@Model.Students[i].Fees" class="form-control" />
                                 </td>
                                 <td class="text-center">
-                                    <a asp-action="DeleteEnquiry"
-                                    asp-controller="Admin"
-                                    asp-route-id="@Model.Students[i].StudentId"
-                                    class="btn btn-sm btn-danger w-100 w sm-auto"
-                                    onclick="return confirm('Are you sure you want to delete this student ?');">
-                                    Delete
-                                    </a>
+                                    <button type="button"
+                                            class="btn btn-sm btn-danger delete-student-btn"
+                                            data-id="@Model.Students[i].StudentId">
+                                        Delete
+                                    </button>
                                 </td>
+
                             </tr>
                         }
                     </tbody>

@@ -1,18 +1,21 @@
-﻿
+﻿@{
+    ViewData["Title"] = "Create Student Profile";
+}
+
 <div class="container my-5">
     <h2 class="mb-4 text-primary">Create Student Profile</h2>
 
     <!-- Profile Image Upload Form -->
-    <form asp-action="Create" method="post" enctype="multipart/form-data" class="mb-5">
+    <form id="profileImageForm" enctype="multipart/form-data" class="mb-5">
         <div class="mb-3">
             <label for="ProfileImage" class="form-label">Upload Profile Photo</label>
             <input type="file" name="ProfileImage" id="ProfileImage" class="form-control" />
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit Image</button>
     </form>
 
     <!-- Student Details Form -->
-    <form asp-action="Create" asp-controller="Student" method="post" class="mb-5">
+    <form id="studentDetailsForm" class="mb-5">
         <div class="mb-3">
             <label for="FullName" class="form-label">Full Name</label>
             <input type="text" name="FullName" id="FullName" class="form-control" />
@@ -49,13 +52,56 @@
             <label for="IsActive" class="form-check-label">Is Active</label>
         </div>
 
-        <button type="submit" class="btn btn-success w-100">Submit</button>
+        <button type="submit" class="btn btn-success w-100">Submit Details</button>
     </form>
 
-    @if (ViewBag.Message != null)
-    {
-        <div class="alert alert-success text-center">
-            @ViewBag.Message
-        </div>
-    }
+    <!-- Success Message -->
+    <div id="studentMessage" class="alert alert-success text-center d-none"></div>
 </div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // 🔵 Submit Profile Image
+            $("#profileImageForm").submit(function (e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+
+                $.ajax({
+                    url: '/Student/UploadProfileImage',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function () {
+                        alert("Profile image uploaded successfully!");
+                        $("#profileImageForm")[0].reset();
+                    },
+                    error: function () {
+                        alert("Error uploading image.");
+                    }
+                });
+            });
+
+            // 🟢 Submit Student Details
+            $("#studentDetailsForm").submit(function (e) {
+                e.preventDefault();
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    url: '/Student/Create',
+                    type: 'POST',
+                    data: formData,
+                    success: function () {
+                        $("#studentMessage").text("Student profile created successfully!").removeClass("d-none");
+                        $("#studentDetailsForm")[0].reset();
+                    },
+                    error: function () {
+                        $("#studentMessage").text("Error creating student profile.").removeClass("d-none").addClass("alert-danger");
+                    }
+                });
+            });
+        });
+    </script>
+}

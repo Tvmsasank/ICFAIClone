@@ -4,12 +4,12 @@
     ViewData["Title"] = "Admin Login";
 }
 
-<!-- Bootstrap container for centering -->
 <div class="container d-flex justify-content-center align-items-center min-vh-100 bg-white">
     <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%;">
         <h2 class="text-center mb-4 text-primary">Admin Login</h2>
 
-        <form asp-action="Login" asp-controller="Admin" method="post">
+        <!-- AJAX-enabled login form -->
+        <form id="adminLoginForm">
             <div class="mb-3">
                 <label asp-for="Username" class="form-label"></label>
                 <input asp-for="Username" class="form-control" />
@@ -22,12 +22,37 @@
 
             <button type="submit" class="btn btn-primary w-100">Login</button>
 
-            @if (ViewBag.Error != null)
-            {
-                <div class="alert alert-danger mt-3 text-center" role="alert">
-                    @ViewBag.Error
-                </div>
-            }
+            <!-- Dynamic error message -->
+            <div id="loginError" class="alert alert-danger mt-3 text-center d-none"></div>
         </form>
     </div>
 </div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#adminLoginForm").submit(function (e) {
+                e.preventDefault();
+
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    url: '/Admin/Login',
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.href = response.redirectUrl;
+                        } else {
+                            $("#loginError").text(response.message).removeClass("d-none");
+                        }
+                    },
+                    error: function () {
+                        $("#loginError").text("Server error. Please try again.").removeClass("d-none");
+                    }
+                });
+            });
+        });
+    </script>
+}

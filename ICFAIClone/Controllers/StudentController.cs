@@ -16,13 +16,8 @@ public class StudentController : Controller
     [HttpPost]
     public IActionResult Create(Student student)
     {
-        if (student.Course != null)
-        {
-            _studentService.InsertStudent(student);
-            ViewBag.Message = "Student inserted successfully!";
-        }
-
-        return View("Create");
+        _studentService.InsertStudent(student); // Your insert logic
+        return Ok();
     }
 
     public IActionResult Index()

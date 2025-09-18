@@ -31,16 +31,20 @@ namespace ICFAIClone.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(AdminLogin login)
+        public IActionResult Login(AdminLogin model)
         {
-            if (login.Username == adminUser && login.Password == adminPass)
+            // Replace with actual authentication logic
+            if (model.Username == "admin" && model.Password == "Admin@123")
             {
-                return RedirectToAction("AdminDashboard");
+                // Set session or authentication cookie here if needed
+                return Json(new { success = true, redirectUrl = Url.Action("AdminDashboard") });
             }
-
-            ViewBag.Error = "Invalid credentials.";
-            return View();
+            else
+            {
+                return Json(new { success = false, message = "Invalid username or password." });
+            }
         }
+
 
         public IActionResult AdminDashboard()
         {

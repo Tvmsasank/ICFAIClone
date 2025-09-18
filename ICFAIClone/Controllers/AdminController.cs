@@ -125,6 +125,13 @@ namespace ICFAIClone.Controllers
             return RedirectToAction("AdminDashboard"); //wherever your main view is
         }
 
+        [HttpPost]
+        public IActionResult DeleteStudent(int id)
+        {
+            _adminService.DeleteStudent(id);
+            return Ok(); // AJAX expects a 200 response
+        }
+
         public IActionResult Logout()
         {
             return RedirectToAction("Login");

@@ -143,14 +143,47 @@ else
         <div class="alert alert-warning">No enquiries found.</div>
 }
 
-@section Scripts
-{
+@section Scripts {
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-            window.onload = function () {
-                var message = '@TempData["UpdateSuccess"]';
-                if (message) {
-                    alert(message); // You can replace this with a toast if you prefer
-                }
-            };
+            $(document).ready(function () {
+                // 🔴 Delete Student
+                $(".delete-student-btn").click(function () {
+                    if (confirm("Are you sure you want to delete this student?")) {
+                        var id = $(this).data("id");
+                        $.ajax({
+                            url: '/Admin/DeleteStudent',
+                            type: 'POST',
+                            data: { id: id },
+                            success: function () {
+                                alert("Student deleted successfully!");
+                                location.reload(); // or remove row dynamically
+                            },
+                            error: function () {
+                                alert("Error deleting student.");
+                            }
+                        });
+                    }
+                });
+
+                // 🔴 Delete Enquiry
+                $(".delete-enquiry-btn").click(function () {
+                    if (confirm("Are you sure you want to delete this enquiry?")) {
+                        var id = $(this).data("id");
+                        $.ajax({
+                            url: '/Admin/DeleteEnquiry',
+                            type: 'POST',
+                            data: { id: id },
+                            success: function () {
+                                alert("Enquiry deleted successfully!");
+                                location.reload();
+                            },
+                            error: function () {
+                                alert("Error deleting enquiry.");
+                            }
+                        });
+                    }
+                });
+            });
         </script>
 }

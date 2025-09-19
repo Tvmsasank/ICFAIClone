@@ -44,24 +44,8 @@ namespace ICFAIClone.Services
 
         public bool ValidateStudentLogin(string username, string password)
         {
-            using (var connection = new SqlConnection(_dbHelper.GetConnection().ConnectionString))
-            using (var command = new SqlCommand("ValidateStudentLogin", connection))
-            {
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@Username", username);
-                command.Parameters.AddWithValue("@Password", password);
-
-                var statusParam = new SqlParameter("@Status", SqlDbType.Int)
-                {
-                    Direction = ParameterDirection.Output
-                };
-                command.Parameters.Add(statusParam);
-
-                connection.Open();
-                command.ExecuteNonQuery();
-
-                return (int)statusParam.Value == 1;
-            }
+            var student = _context.Students.FirstOrDefault(s => s.Username == username);
+            return student != null && student.Password == password;
         }
 
         public List<Student> GetAllStudents()
